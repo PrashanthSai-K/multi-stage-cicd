@@ -1,0 +1,39 @@
+@Library('GenericSharedLibPython') _
+
+pipeline {
+    agent { label 'slave-node' }
+
+    environment {
+        APP_TYPE = "python"
+        IMAGE = "flask-app"
+        CONTAINER = "flask-container"
+    }
+
+    stages {
+
+        stage('Build') {
+            steps {
+                echo "Branch: ${env.BRANCH_NAME}"
+                build(appType: APP_TYPE)
+            }
+        }
+
+        stage('Test') {
+            steps {
+                test(appType: APP_TYPE)
+            }
+        }
+
+        stage('Deploy (main only)') {
+            when {
+                branch 'main'
+            }
+            steps {
+                deploy(
+                    imageName: IMAGE,
+                    containerName: CONTAINER
+                )
+            }
+        }
+    }
+}
