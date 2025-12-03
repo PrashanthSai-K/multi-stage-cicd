@@ -1,8 +1,13 @@
 pipeline {
     agent { label 'slave-node' }
 
-    parameters {
-        string(name: 'ENVIRONMENT', defaultValue: 'dev', description: 'Enter environment: dev / test / prod')
+    environment {
+        ENVIRONMENT = (
+            env.BRANCH_NAME.startsWith('dev')  ? 'dev'  :
+            env.BRANCH_NAME.startsWith('test') ? 'test' :
+            env.BRANCH_NAME.startsWith('prod') ? 'prod' :
+            'unknown'
+        )
     }
 
     stages {
