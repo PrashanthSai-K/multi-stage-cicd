@@ -2,15 +2,29 @@ pipeline {
     agent { label 'slave-node' }
 
     environment {
-        ENVIRONMENT = (
-            env.BRANCH_NAME.startsWith('dev')  ? 'dev'  :
-            env.BRANCH_NAME.startsWith('test') ? 'test' :
-            env.BRANCH_NAME.startsWith('prod') ? 'prod' :
-            'unknown'
-        )
+        ENVIRONMENT = 'unknown'
     }
 
     stages {
+
+        stage('Set Environment') {
+            steps {
+                script {
+                    if (env.BRANCH_NAME.startsWith("dev")) {
+                        ENVIRONMENT = "dev"
+                    } else if (env.BRANCH_NAME.startsWith("test")) {
+                        ENVIRONMENT = "test"
+                    } else if (env.BRANCH_NAME.startsWith("prod")) {
+                        ENVIRONMENT = "prod"
+                    } else {
+                        ENVIRONMENT = "unknown"
+                    }
+                }
+
+                echo "Selected environment = ${ENVIRONMENT}"
+            }
+        }
+
 
         stage('Build') {
             steps {
