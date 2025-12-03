@@ -10,7 +10,7 @@ pipeline {
         stage('Set Environment') {
             steps {
                 script {
-                    if (env.BRANCH_NAME.startsWith("dev")) {
+                    if (env.BRANCH_NAME.startsWith("main")) {
                         ENVIRONMENT = "dev"
                     } else if (env.BRANCH_NAME.startsWith("test")) {
                         ENVIRONMENT = "test"
