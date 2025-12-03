@@ -22,7 +22,7 @@ pipeline {
             steps {
                 dir('task-3'){
                     echo "Branch: ${env.BRANCH_NAME}"
-                    build(appType: APP_TYPE)
+                    buildApp(appType: APP_TYPE)
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
         stage('Test') {
             steps {
                 dir('task-3'){
-                    test(appType: APP_TYPE)
+                    testApp(appType: APP_TYPE)
                 }
             }
         }
@@ -41,7 +41,7 @@ pipeline {
             }
             steps {
                 dir('task-3'){
-                    deploy(
+                    deployApp(
                         imageName: IMAGE,
                         containerName: CONTAINER
                     )
