@@ -30,6 +30,7 @@ pipeline {
         stage('Test') {
             steps {
                 dir('task-3'){
+                    sh 'whoami'
                     testApp(appType: APP_TYPE)
                 }
             }
