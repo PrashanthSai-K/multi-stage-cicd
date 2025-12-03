@@ -30,7 +30,7 @@ pipeline {
             steps {
                 echo "===== BUILD STAGE ====="
                 echo "Selected Environment: ${ENVIRONMENT}"
-                sh 'echo Building the application.....'
+                sh 'echo Building the application....'
             }
         }
 
@@ -38,7 +38,7 @@ pipeline {
             steps {
                 echo "===== TEST STAGE ====="
                 echo "Selected Environment: ${ENVIRONMENT}"
-                sh 'echo Running tests.....'
+                sh 'echo Running tests....'
             }
         }
 
@@ -47,7 +47,7 @@ pipeline {
                 echo "===== DEPLOY STAGE ====="
                 echo "Deploying to environment: ${ENVIRONMENT}"
                 sh """
-                    echo Deploying to ${ENVIRONMENT}.....
+                    echo Deploying to ${ENVIRONMENT}....
                 """
             }
         }
