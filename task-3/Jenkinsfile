@@ -44,7 +44,6 @@ pipeline {
                 dir('task-3'){
                     deployApp(
                         imageName: IMAGE,
-                        containerName: CONTAINER
                     )
                }
             }
