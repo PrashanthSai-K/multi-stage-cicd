@@ -11,6 +11,13 @@ pipeline {
 
     stages {
 
+        stage('Test Lib') {
+            steps {
+                helloLib()
+            }
+        }
+
+
         stage('Build') {
             steps {
                 dir('task-3'){
