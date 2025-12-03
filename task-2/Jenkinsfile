@@ -1,0 +1,42 @@
+pipeline {
+    agent { label 'slave-node' }
+
+    parameters {
+        string(name: 'ENVIRONMENT', defaultValue: 'dev', description: 'Enter environment: dev / test / prod')
+    }
+
+    stages {
+
+        stage('Build') {
+            steps {
+                echo "===== BUILD STAGE ====="
+                echo "Selected Environment: ${ENVIRONMENT}"
+                sh 'echo Building the application...'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "===== TEST STAGE ====="
+                echo "Selected Environment: ${ENVIRONMENT}"
+                sh 'echo Running tests...'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "===== DEPLOY STAGE ====="
+                echo "Deploying to environment: ${ENVIRONMENT}"
+                sh """
+                    echo Deploying to ${ENVIRONMENT}...
+                """
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Pipeline completed for environment: ${ENVIRONMENT}"
+        }
+    }
+}
